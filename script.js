@@ -33,19 +33,19 @@ function addTask() {
     var btnContainer = document.createElement("div");
 
     // Complete button
-    var completeBtn = document.createElement("button");
-    completeBtn.textContent = "✔";
-    completeBtn.style.marginRight = "8px";
-
     completeBtn.onclick = function () {
-        if (span.style.textDecoration === "line-through") {
-            span.style.textDecoration = "none";
-            span.style.color = "";
-        } else {
-            span.style.textDecoration = "line-through";
-            span.style.color = "gray";
-        }
-    };
+    if (span.style.textDecoration === "line-through") {
+        // Uncomplete task
+        span.style.textDecoration = "none";
+        span.style.color = "";
+        li.style.backgroundColor = "";
+    } else {
+        // Complete task
+        span.style.textDecoration = "line-through";
+        span.style.color = "white";
+        li.style.backgroundColor = "green";
+    }
+};
 
     // Delete button
     var deleteBtn = document.createElement("button");
