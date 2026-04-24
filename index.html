@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive To-Do App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <header class="app-header">
+            <h1>MY DAILY ACTIVITIES SCHEDULE</h1>
+        </header>
+
+        <section class="task-input-section">
+            <input 
+                type="text" 
+                id="taskInput" 
+                placeholder="Enter a new task..."
+            >
+            <button id="addTaskBtn">Add</button>
+        </section>
+
+
+        <section class="task-list-section">
+            <ul id="taskList">
+                
+              
+            </ul>
+        </section>
+
+        <footer class="app-footer">
+            <p id="taskCounter">0 tasks</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
