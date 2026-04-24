@@ -1,87 +1,92 @@
-// Select elements
 var taskInput = document.getElementById("taskInput");
 var addTaskBtn = document.getElementById("addTaskBtn");
 var taskList = document.getElementById("taskList");
 var taskCounter = document.getElementById("taskCounter");
 
-// Track number of tasks
 var count = 0;
 
-// Function to update counter
+// Update counter
 function updateCounter() {
     taskCounter.textContent = count + (count === 1 ? " task" : " tasks");
 }
 
-// Add task function
-function addTask() {
+// Add task
+addTaskBtn.addEventListener("click", function () {
     var taskText = taskInput.value.trim();
 
-    // Prevent empty tasks
-    if (taskText === "") {
-        alert("Task cannot be empty");
-        return;
-    }
+    if (taskText === "") return;
 
-    // Create list item
+    // create list item
     var li = document.createElement("li");
 
-    // Task text
+    // task text
     var span = document.createElement("span");
     span.textContent = taskText;
 
-    // Buttons container
-    var btnContainer = document.createElement("div");
+    // BUTTON CONTAINER
+    var btnGroup = document.createElement("div");
+    btnGroup.style.display = "flex";
+    btnGroup.style.gap = "8px";
 
-    // Complete button
-    completeBtn.onclick = function () {
-    if (span.style.textDecoration === "line-through") {
-        // Uncomplete task
-        span.style.textDecoration = "none";
-        span.style.color = "";
-        li.style.backgroundColor = "";
-    } else {
-        // Complete task
-        span.style.textDecoration = "line-through";
-        span.style.color = "white";
-        li.style.backgroundColor = "green";
-    }
-};
-
-    // Delete button
+    // DELETE BUTTON 🗑
     var deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "✖";
+    deleteBtn.textContent = "🗑";
+    deleteBtn.style.border = "none";
+    deleteBtn.style.cursor = "pointer";
+    deleteBtn.style.padding = "6px 10px";
+    deleteBtn.style.borderRadius = "8px";
+    deleteBtn.style.background = "#ff4d4d";
+    deleteBtn.style.color = "white";
 
-    deleteBtn.onclick = function () {
-        taskList.removeChild(li);
+    deleteBtn.addEventListener("click", function () {
+        li.remove();
         count--;
         updateCounter();
-    };
+    });
 
-    // Append buttons
-    btnContainer.appendChild(completeBtn);
-    btnContainer.appendChild(deleteBtn);
+    // COMPLETE / CYCLE BUTTON 🔄 → ✓
+    var completeBtn = document.createElement("button");
+    completeBtn.textContent = "🔄";
+    completeBtn.style.border = "none";
+    completeBtn.style.cursor = "pointer";
+    completeBtn.style.padding = "6px 10px";
+    completeBtn.style.borderRadius = "8px";
+    completeBtn.style.background = "#e2e8f0";
 
-    // Append text and buttons to li
+    var isDone = false;
+
+    completeBtn.addEventListener("click", function () {
+        isDone = !isDone;
+
+        if (isDone) {
+            li.style.background = "#d1fae5";
+            span.style.textDecoration = "line-through";
+            span.style.color = "#065f46";
+
+            completeBtn.textContent = "✔";
+            completeBtn.style.background = "#22c55e";
+            completeBtn.style.color = "white";
+        } else {
+            li.style.background = "#fff";
+            span.style.textDecoration = "none";
+            span.style.color = "#2d3436";
+
+            completeBtn.textContent = "🔄";
+            completeBtn.style.background = "#e2e8f0";
+            completeBtn.style.color = "black";
+        }
+    });
+
+    // assemble buttons
+    btnGroup.appendChild(completeBtn);
+    btnGroup.appendChild(deleteBtn);
+
     li.appendChild(span);
-    li.appendChild(btnContainer);
+    li.appendChild(btnGroup);
 
-    // Add to list
     taskList.appendChild(li);
 
-    // Clear input
     taskInput.value = "";
-
-    // Update counter
     count++;
     updateCounter();
-}
-
-// Event listeners
-addTaskBtn.onclick = addTask;
-
-// Allow Enter key to add task
-taskInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-        addTask();
-    }
 });
