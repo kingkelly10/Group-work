@@ -5,30 +5,25 @@ var taskCounter = document.getElementById("taskCounter");
 
 var count = 0;
 
-// Update counter
 function updateCounter() {
     taskCounter.textContent = count + (count === 1 ? " task" : " tasks");
 }
 
-// Add task
+
 addTaskBtn.addEventListener("click", function () {
     var taskText = taskInput.value.trim();
 
     if (taskText === "") return;
 
-    // create list item
     var li = document.createElement("li");
 
-    // task text
     var span = document.createElement("span");
     span.textContent = taskText;
 
-    // BUTTON CONTAINER
     var btnGroup = document.createElement("div");
     btnGroup.style.display = "flex";
     btnGroup.style.gap = "8px";
 
-    // DELETE BUTTON 🗑
     var deleteBtn = document.createElement("button");
     deleteBtn.textContent = "🗑";
     deleteBtn.style.border = "none";
@@ -44,7 +39,6 @@ addTaskBtn.addEventListener("click", function () {
         updateCounter();
     });
 
-    // COMPLETE / CYCLE BUTTON 🔄 → ✓
     var completeBtn = document.createElement("button");
     completeBtn.textContent = "🔄";
     completeBtn.style.border = "none";
@@ -77,7 +71,6 @@ addTaskBtn.addEventListener("click", function () {
         }
     });
 
-    // assemble buttons
     btnGroup.appendChild(completeBtn);
     btnGroup.appendChild(deleteBtn);
 
